@@ -99,6 +99,7 @@ function cfprimecat_cfct_choose_content_template($filename, $type) {
 	return $filename;
 }
 add_filter('cfct_choose_content_template', 'cfprimecat_cfct_choose_content_template', 10, 2);
+add_filter('cfct_choose_general_template', 'cfprimecat_cfct_choose_content_template', 10, 2);
 
 // example of ensuring primary category is used in URL
 
