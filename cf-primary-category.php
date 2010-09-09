@@ -10,10 +10,6 @@ Author URI: http://crowdfavorite.com
 
 //ini_set('display_errors', '1'); ini_set('error_reporting', E_ALL);
 
-if (!defined('PLUGINDIR')) {
-	define('PLUGINDIR','wp-content/plugins');
-}
-
 function cfprimecat_request_handler() {
 	if (!empty($_GET['cf_action'])) {
 		switch ($_GET['cf_action']) {
@@ -37,7 +33,7 @@ function setPrimaryCatOptions() {
 		}
 	});
 }
-jQuery(document).ready(function($){
+jQuery(document).ready(function($) {
 	var primary_cat = $('#cf_meta__cf_primary_category');
 // handle removal of selected options	
 	$('input[name="post_category[]"]').click(function() {
