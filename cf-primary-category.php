@@ -10,20 +10,9 @@ Author URI: http://crowdfavorite.com
 
 //ini_set('display_errors', '1'); ini_set('error_reporting', E_ALL);
 
-function cfprimecat_request_handler() {
-	if (!empty($_GET['cf_action'])) {
-		switch ($_GET['cf_action']) {
-			case 'cfprimecat_admin_js':
-				cfprimecat_admin_js();				
-				break;
-		}
-	}
-}
-add_action('init', 'cfprimecat_request_handler');
-
 function cfprimecat_admin_js() {
-	header('Content-type: text/javascript');
 ?>
+<script type="text/javascript">
 function setPrimaryCatOptions() {
 	var primary_cat = jQuery('#cf_meta__cf_primary_category');
 	jQuery('input[name="post_category[]"]').each(function() {
@@ -33,7 +22,7 @@ function setPrimaryCatOptions() {
 		}
 	});
 }
-jQuery(document).ready(function($) {
+jQuery(function($) {
 	var primary_cat = $('#cf_meta__cf_primary_category');
 // handle removal of selected options	
 	$('input[name="post_category[]"]').click(function() {
@@ -44,18 +33,17 @@ jQuery(document).ready(function($) {
 	});
 	setPrimaryCatOptions();
 });
+</script>
 <?php
-	die();
 }
 
-if (is_admin()) {
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('cfprimecat_admin_js', trailingslashit(get_bloginfo('url')).'?cf_action=cfprimecat_admin_js', array('jquery'));
+if (is_admin() && in_array(basename($_SERVER['SCRIPT_FILENAME'], '.php'), array('post', 'post-new'))) {
+	add_action('admin_head', 'cfprimecat_admin_js');
 }
 
 function cfprimecat_edit_cfmeta($config) {
 	$cat_options = array('' => '-----');
-	$cats = get_categories('hide_empty=0');
+	$cats = apply_filters('cfprimecat_edit_cfmeta_cats', get_categories('hide_empty=0'));
 	foreach ($cats as $cat) {
 		$cat_options[$cat->term_id] = $cat->name;
 	}
@@ -64,11 +52,12 @@ function cfprimecat_edit_cfmeta($config) {
 		'description' => '',
 		'id' => 'cf_primary_category',
 		'type' => 'post',
+		'context' => 'side',
 		'items' => array(
 			array(
 				'type' => 'select',
 				'name' => '_cf_primary_category',
-				'label' => 'Primary Category',
+				'label' => 'Category',
 				'default_value' => '',
 				'options' => $cat_options
 			),
