@@ -4,4 +4,6 @@ Adds a post-meta box to the post edit screen for selecting the primary category 
 
 `cfprimecat_get_primary_category()` can be used to retrieve the primary category taxonomy object.
 
+The plugin also supplies a carrington-core filter for content & general template selection under the `tax-{taxonomy-slug}-{term_slug}.php` format.
+
 Requires CF Post Meta.
