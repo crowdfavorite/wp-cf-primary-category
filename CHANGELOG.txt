@@ -1,4 +1,7 @@
 # CF Primary Category
 
+## 1.2
+- overhaul to accommodate custom taxonomies
+
 ## 1.1 
 - Initial release
