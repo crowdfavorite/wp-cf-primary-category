@@ -128,7 +128,7 @@ function cfprimecat_edit_cfmeta($config) {
 		'context' => 'side',
 		'items' => array(
 			array(
-				'type' => 'select',
+				'type' => 'select',	
 				'name' => '_cf_primary_category',
 				'label' => 'Category',
 				'default_value' => $default_value,
