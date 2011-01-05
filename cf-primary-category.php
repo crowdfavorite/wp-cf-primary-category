@@ -80,7 +80,8 @@ function cfprimecat_admin_js() {
 					var _this = $(this);
 					var _value = _this.closest('li').attr('id');
 					if (_this.is(':checked') && !pc.catOptionExists(_value)) {
-						pc.setPrimaryCatOption(_value, _this.parent().text());
+						var _tax = _this.attr('name').match(/\[(.*)\]\[/);
+						pc.setPrimaryCatOption(_value, _this.parent().text() + ' (' + _tax[1] + ')');
 					}
 					else if(!_this.is(':checked')) {
 						pc.unSetPrimaryCatOption(_value);
@@ -115,7 +116,7 @@ function cfprimecat_edit_cfmeta($config) {
 	
 	if (!empty($primary_cat)) {
 		$key = $primary_cat->taxonomy.'-'.$primary_cat->term_id;
-		$cat_options[$key] = $primary_cat->name;
+		$cat_options[$key] = $primary_cat->name.' ('.$primary_cat->taxonomy.')';
 		$default_value = $key;
 	}
 		
