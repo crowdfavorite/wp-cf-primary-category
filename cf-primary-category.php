@@ -191,6 +191,15 @@ function cfprimecat_get_post_types() {
 	return apply_filters('cfprimecat_active_post_types', array('post'));
 }
 
+// CF Revision Manager support
+	
+	function cf_primecat_register_postmeta() {
+		if (function_exists('cfr_register_metadata')) {
+			cfr_register_metadata('_cf_primary_category');
+		}
+	}
+	add_action('init', 'cf_primecat_register_postmeta');
+
 // example of ensuring primary category is used in URL
 
 /*
