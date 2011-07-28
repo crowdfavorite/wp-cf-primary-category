@@ -180,7 +180,14 @@ function cfprimecat_cfct_choose_content_template($filename, $type) {
 	return $filename;
 }
 add_filter('cfct_choose_content_template', 'cfprimecat_cfct_choose_content_template', 10, 2);
-add_filter('cfct_choose_general_template', 'cfprimecat_cfct_choose_content_template', 10, 2);
+
+function cfprimecat_cfct_choose_general_template($filename, $type) {
+	if (is_singular()) {
+		$filename = cfprimecat_cfct_choose_content_template($filename, $type);
+	}
+	return $filename;
+}
+add_filter('cfct_choose_general_template', 'cfprimecat_cfct_choose_general_template', 10, 2);
 
 /**
  * Add to the array of post-types that primary category selection will be avaible on
