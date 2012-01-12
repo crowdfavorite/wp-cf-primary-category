@@ -18,33 +18,10 @@ function cfprimecatto_init() {
 add_action('init', 'cfprimecatto_init');
 
 function cfprimecatto_admin_js() {
-?>
-<script type="text/javascript">
-function setPrimaryCatOptions() {
-	var primary_cat = jQuery('#cf_meta__cf_primary_category');
-	jQuery('#category-all > ul > li > label > input[name="post_category[]"]').each(function() {
-// if not checked, remove from select list
-		if (!jQuery(this).attr('checked')) {
-			primary_cat.find('option[value=' + jQuery(this).val() + ']').remove();
-		}
-	});
-}
-jQuery(function($) {
-	var primary_cat = $('#cf_meta__cf_primary_category');
-// handle removal of selected options	
-	$('#category-all > ul > li > label > input[name="post_category[]"]').click(function() {
-		if ($(this).attr('checked') && primary_cat.find('option[value=' + $(this).val() + ']').size() < 1) {
-			primary_cat.append('<option value="' + $(this).val() + '">' + $(this).parent().text() + '</option>');
-		}
-		setPrimaryCatOptions();
-	});
-	setPrimaryCatOptions();
-});
-</script>
-<?php
+	require 'js/primary-category-top-only.js';
 }
 
-if (is_admin() && in_array(basename($_SERVER['SCRIPT_FILENAME'], '.php'), array('post', 'post-new'))) {
+if (in_array(basename($_SERVER['SCRIPT_FILENAME']), array('post.php', 'post-new.php'))) {
 	add_action('admin_head', 'cfprimecatto_admin_js');
 }
 
