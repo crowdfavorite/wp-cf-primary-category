@@ -28,7 +28,8 @@
 			});
 
 			// The count is checked for 2 (instead of 1) since there is always a "-------" spacer and we want the 2nd child
-			if (cfPrimaryCategoryDropdown.children('option').length == 2) {
+			// Also a blank dropdown means that nothign is selected, so a selection is made if available.
+			if (cfPrimaryCategoryDropdown.val() == '' || cfPrimaryCategoryDropdown.children('option').length == 2) {
 				cfPrimaryCategoryDropdown.val(jQuery('#cf_meta__cf_primary_category option:nth-child(2)').val());
 			}
 		};
