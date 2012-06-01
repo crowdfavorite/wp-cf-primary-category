@@ -5,7 +5,7 @@
 	jQuery(function($) {
 		var cfPrimaryCategoryDropdown = jQuery('#cf_meta__cf_primary_category');
 		var cfPrimaryCategoryCheckboxes = jQuery('#category-all > ul > li > label > input[name="post_category[]"]');
-
+		
 		var setPrimaryCatOptions = function() {
 			cfPrimaryCategoryCheckboxes.each(function() {
 				var checkbox = jQuery(this);
@@ -26,6 +26,11 @@
 					option.remove();
 				}
 			});
+
+			// The count is checked for 2 (instead of 1) since there is always a "-------" spacer and we want the 2nd child
+			if (cfPrimaryCategoryDropdown.children('option').length == 2) {
+				cfPrimaryCategoryDropdown.val(jQuery('#cf_meta__cf_primary_category option:nth-child(2)').val());
+			}
 		};
 		
 		var addAnotherOption = function(val, text) {
