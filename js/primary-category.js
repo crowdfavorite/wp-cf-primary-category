@@ -47,7 +47,10 @@
 					else if(!_this.is(':checked')) {
 						pc.unSetPrimaryCatOption(_value);
 					}
-				}).trigger('change');
+				});
+
+				// Only trigger the change event for the checked boxes, so they populate the dropdown
+				$('#' + taxonomy + 'checklist input[type=checkbox]:checked').trigger('change');
 			});
 
 			pc.first_run = false;
