@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: CF Primary Category
-Plugin URI: http://crowdfavorite.com 
-Description: Allows the selection of a primary category, and chooses that category in Carrington 
+Plugin URI: http://crowdfavorite.com
+Description: Allows the selection of a primary category, and chooses that category in Carrington
 Version: 1.2
 Author: Crowd Favorite
 Author URI: http://crowdfavorite.com
@@ -17,7 +17,7 @@ Author URI: http://crowdfavorite.com
  * the active post type.
  *
  * Only acts upon hierarchical taxonomies that are active for the current post-type
- * 
+ *
  * @return void
  */
 function cfprimecat_admin_js() {
@@ -28,12 +28,12 @@ function cfprimecat_admin_js() {
 		global $post;
 		$post_type = $post->post_type;
 	}
-	
+
 	// bail if we're not enabled on this post-type
 	if (!in_array($post_type, cfprimecat_get_post_types())) {
 		return;
 	}
-	
+
 	// find our hierarchical taxonomy types that are active for this post-type
 	$taxonomies = array();
 	foreach (get_object_taxonomies($post_type, 'objects') as $key => $obj) {
@@ -56,22 +56,22 @@ add_action('admin_head', 'cfprimecat_admin_js');
  * Populate the default options list
  * Only value we need is the currently selected item (if selected)
  *
- * @param array $config 
+ * @param array $config
  * @return array
  */
-function cfprimecat_edit_cfmeta($config) {	
+function cfprimecat_edit_cfmeta($config) {
 	global $post;
 	$primary_cat = cfprimecat_get_primary_category($post->ID);
 
 	$cat_options = array('' => '--------');
 	$default_value = '';
-	
+
 	if (!empty($primary_cat)) {
 		$key = $primary_cat->taxonomy.'-'.$primary_cat->term_id;
 		$cat_options[$key] = $primary_cat->name.' ('.$primary_cat->taxonomy.')';
 		$default_value = $key;
 	}
-		
+
 	$config[] = array(
 		'title' => 'Primary Category',
 		'description' => '',
@@ -80,7 +80,7 @@ function cfprimecat_edit_cfmeta($config) {
 		'context' => 'side',
 		'items' => array(
 			array(
-				'type' => 'select',	
+				'type' => 'select',
 				'name' => '_cf_primary_category',
 				'label' => 'Category',
 				'default_value' => $default_value,
@@ -95,10 +95,10 @@ add_filter('cf_meta_config', 'cfprimecat_edit_cfmeta');
 /**
  * Return the primary category info for the post
  * Postmeta is stored as {taxonomy-name}-{term_id}
- * 
+ *
  * Function returns a taxonomy term object on success, false on failure
  *
- * @param int $post_id 
+ * @param int $post_id
  * @return mixed
  */
 function cfprimecat_get_primary_category($post_id) {
@@ -144,7 +144,7 @@ function cfprimecat_get_post_types() {
 }
 
 // CF Revision Manager support
-	
+
 	function cf_primecat_register_postmeta() {
 		if (function_exists('cfr_register_metadata')) {
 			cfr_register_metadata('_cf_primary_category');
