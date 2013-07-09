@@ -3,7 +3,7 @@
 Plugin Name: CF Primary Category
 Plugin URI: http://crowdfavorite.com
 Description: Allows the selection of a primary category, and chooses that category in Carrington
-Version: 1.2
+Version: 1.2.1
 Author: Crowd Favorite
 Author URI: http://crowdfavorite.com
 */

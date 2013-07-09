@@ -1,5 +1,9 @@
 # CF Primary Category
 
+## 1.2.1
+- 3.5.2 compatability -- changed taxonomy selectors for checkboxes in the admin
+- JS a little more effecient by initially triggering the change event only on the checked checkboxes
+
 ## 1.2
 - overhaul to accommodate custom taxonomies
 
