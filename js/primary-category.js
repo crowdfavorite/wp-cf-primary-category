@@ -30,7 +30,7 @@
 
 			// attach listeners
 			$.each(pc.taxonomies, function(i, taxonomy){
-				$('.' + taxonomy + 'checklist input[type=checkbox]').change(function(){
+				$('#' + taxonomy + 'checklist input[type=checkbox]').on('change', function(){
 					var _this = $(this);
 					var _value = _this.closest('li').attr('id');
 					if (_this.is(':checked') && !pc.catOptionExists(_value)) {
