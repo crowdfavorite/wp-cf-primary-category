@@ -1,11 +1,11 @@
-<?php 
+<?php
 /* This is fairly brittle JS, it only allows for the category taxonomy */
 ?>
 <script type="text/javascript">
 	jQuery(function($) {
 		var cfPrimaryCategoryDropdown = jQuery('#cf_meta__cf_primary_category');
 		var cfPrimaryCategoryCheckboxes = jQuery('#category-all > ul > li > label > input[name="post_category[]"]');
-		
+
 		var setPrimaryCatOptions = function() {
 			cfPrimaryCategoryCheckboxes.each(function() {
 				var checkbox = jQuery(this);
@@ -15,7 +15,7 @@
 					// see if it's in the dropdown, if not then add it
 					if (option.size() < 1) {
 						addAnotherOption(
-							checkbox.val(), 
+							checkbox.val(),
 							checkbox
 								.parent()
 								.text()
@@ -33,11 +33,11 @@
 				cfPrimaryCategoryDropdown.val(jQuery('#cf_meta__cf_primary_category option:nth-child(2)').val());
 			}
 		};
-		
+
 		var addAnotherOption = function(val, text) {
 			cfPrimaryCategoryDropdown.append('<option value="category-' + val + '">' + text + '</option>')
 		};
-		
+
 		// Append the options
 		setPrimaryCatOptions();
 
