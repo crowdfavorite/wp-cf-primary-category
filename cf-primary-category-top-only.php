@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CF Primary Category (Top Level Only)
-Plugin URI: http://crowdfavorite.com 
+Plugin URI: http://crowdfavorite.com
 Description: Limits CF Primary Category selection feature to top level categories only.
 Version: 1.0
 Author: Crowd Favorite
